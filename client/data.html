@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="js/engine.io.js"></script>
+    <script src="js/minilog.js"></script>
+    <script src="js/radar_client.js"></script>
+    <script>
+      var userId = Math.floor((Math.random() * 10) + 1);
+
+      Minilog.enable();
+      RadarClient.configure({
+        host: window.location.hostname,
+        port: 8001,
+        userId: userId,
+        accountType: 'funccaunt',
+        accountName: 'dev'
+      });
+
+      RadarClient.alloc('fundar', function() {
+        RadarClient.presence('thing').set('online').subscribe(function(message) {
+          console.log('Online:', message);
+        }).sync();
+      });
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
