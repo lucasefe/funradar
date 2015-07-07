@@ -14,16 +14,13 @@
         userId: 'joe',
         userType: 'fun',
         accountName: 'dev',
-        version: 2
+        options: {version: 2}
       });
 
       RadarClient.alloc('fundar', function() {
         RadarClient.presence('page/1').on(function(message) {
-          console.log("ON", message.op, message.value); 
-        }).subscribe().sync(function(message){
-            console.log("SYNC", message.op, message.value);
-            RadarClient.presence('page/1').set('online', {1: 3});
-        });
+          console.log(message.op, message.value.clientData);
+        }).sync();
       });
     </script>
   </head>
